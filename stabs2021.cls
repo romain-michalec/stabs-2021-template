@@ -1,23 +1,40 @@
 % -*- coding: utf-8-unix; mode: latex; fill-column: 80 -*-
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{stabs21}[2021/04/20]
+\ProvidesClass{stabs2021}[2021/04/20]
 
 % Base class
 \LoadClass[a4paper,12pt,headings=small]{scrartcl}
 
-% Packages
+% Font
 \RequirePackage{times}
+
+% Page layout
 \RequirePackage{multicol}
 \setlength{\columnsep}{8mm}
 \RequirePackage[left=2cm,right=2cm,top=3.2cm,bottom=2cm,headheight=2.4cm]{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{fancyhdr}
 \RequirePackage{parskip}
 \setlength{\parindent}{6mm}
 \setlength{\parskip}{2mm}
-\RequirePackage[colorlinks=true,allcolors=blue]{hyperref}
+
+% Citations and references
+\RequirePackage{natbib,har2nat}
+\bibliographystyle{dcu}                    % A Harvard bibliography style
+\setcitestyle{aysep={,}}                   % Default semicolon in dcu style
+\setlength{\bibhang}{6mm}                  % Default 1em in natbib
+\renewcommand{\harvardyearleft}{\unskip, } % Replace (yyyy) with , yyyy.
+\renewcommand{\harvardyearright}[1]{.}     % tex.stackexchange.com/a/20204
+\renewcommand{\bf}{\normalfont\bfseries}   % Replace deprecated \bf command
+\renewcommand{\harvardurl}{\url}           % Replace obsolete \harvardurl command
+
+% Pictures
+\RequirePackage{graphicx}
+
+% Hyperlinks
+\RequirePackage[breaklinks=true,colorlinks=true,allcolors=blue]{hyperref}
 \urlstyle{rm}
+
+% Footnotes
 \RequirePackage[hang,flushmargin]{footmisc}
 \RequirePackage{dblfnote}
 \DFNalwaysdouble
@@ -26,14 +43,15 @@
 \addtokomafont{disposition}{\rmfamily}
 
 % Header
+\RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \rhead{\begin{minipage}[b]{12cm}\centering\footnotesize  Proceedings of the 1st International Conference on the Stability and Safety\\
 of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK\\[1ex]\ 
 \end{minipage}\begin{minipage}[b]{5mm}\thepage\\[1ex]\ \end{minipage}}
-\lhead{\includegraphics[width=4.5cm]{stab-logo.jpg}}
+\lhead{\includegraphics[width=4.5cm]{stabslogo.jpg}}
 \cfoot{}
 
-% Sectioning commands
+% Sections
 \renewcommand*{\sectionformat}{\thesection.\quad}
 \renewcommand*{\subsectionformat}{\thesubsection\autodot\qquad}
 \newcommand{\ulparagraph}[1]{}
