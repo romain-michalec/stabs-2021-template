@@ -2,15 +2,14 @@
 
 \documentclass{stabs2021}
 
-% Choose your dialect of English for correct hyphenation patterns
-% List of languages in documentation on ctan.org/pkg/babel
-% Section 1.27 "Languages supported by babel with ldf files"
-\usepackage[british]{babel}
+% The following packages are loaded by the class and are therefore
+% available without user intervention: babel, graphicx, hyperref,
+% natbib, amsmath, and every symbol that amssymb defines
 
-% Recommended for mathematical typesetting
-\usepackage{amsmath,amssymb}
-
-\begin{document}
+% Choose your dialect of English for correct hyphenation patterns:
+% see list of languages in documentation on ctan.org/pkg/babel,
+% section 1.27 "Languages supported by babel with ldf files"
+\selectlanguage{british}
 
 \title{Guidelines for Preparation of Manuscripts}
 
@@ -34,6 +33,8 @@
 \end{stabsabstract}
 
 \keywords{at least 3 suitable keywords for indexing purposes}
+
+\begin{document}
 
 % This command typesets the title, author, abstract, and keywords in
 % one-column mode. Don't write out any text before it, as it would

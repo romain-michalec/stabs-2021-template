@@ -6,10 +6,13 @@
 % Base class is the KOMA-Script article class
 \LoadClass[twocolumn=true,fontsize=12pt,headings=small,abstract=true]{scrartcl}
 
-% Font and font encoding
-\RequirePackage[T1]{fontenc} % www.texfaq.org/FAQ-why-inp-font
-\RequirePackage{times}
-\RequirePackage{microtype}
+% Font
+\RequirePackage[english]{babel} % Should be loaded before newtxtext
+\RequirePackage{newtxtext}      % Roman text font provided by a Times clone
+\RequirePackage{newtxmath}      % Matching math font, also load amsmath and
+                                % amssymb symbols tex.stackexchange.com/a/564079
+% Font encoding
+\RequirePackage[T1]{fontenc}    % www.texfaq.org/FAQ-why-inp-font
 
 % Page layout (add option showframe to package geometry for debugging purposes)
 \setlength{\columnsep}{8mm}
@@ -18,6 +21,7 @@
 % Text layout
 \RequirePackage[skip,indent=6mm]{parskip} % Set \parskip to 0.5\baselineskip
 \RequirePackage{indentfirst}              % Indent first paragraph of sections
+\RequirePackage{microtype}
 
 % Pictures
 \RequirePackage{graphicx}
