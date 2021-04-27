@@ -1,7 +1,7 @@
 % -*- coding: utf-8-unix; mode: latex -*-
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{stabs2021}[2021/04/26]
+\ProvidesClass{stabs2021}[2021/04/27]
 
 % Base class is the KOMA-Script article class
 \LoadClass[twocolumn=true,fontsize=12pt,headings=small,abstract=true]{scrartcl}
@@ -14,17 +14,23 @@
 % Font encoding
 \RequirePackage[T1]{fontenc}    % www.texfaq.org/FAQ-why-inp-font
 
+% Logo width and height
+\RequirePackage{graphicx}
+\newsavebox{\stabs@logo}
+\savebox{\stabs@logo}{\includegraphics{stabslogo}}
+\newlength{\stabs@logowidth}                          % Used in header
+\settowidth{\stabs@logowidth}{\usebox{\stabs@logo}}   % composition
+\newlength{\stabs@logoheight}                         % Used to set header
+\settoheight{\stabs@logoheight}{\usebox{\stabs@logo}} % height just below
+
 % Page layout (add option showframe to package geometry for debugging purposes)
 \setlength{\columnsep}{8mm}
-\RequirePackage[margin=2cm,top=3.2cm,headheight=2.4cm]{geometry}
+\RequirePackage[margin=2cm,top=3.2cm,headheight=\stabs@logoheight]{geometry}
 
 % Text layout
 \RequirePackage[skip,indent=6mm]{parskip} % Set \parskip to 0.5\baselineskip
 \RequirePackage{indentfirst}              % Indent first paragraph of sections
 \RequirePackage{microtype}
-
-% Pictures
-\RequirePackage{graphicx}
 
 % Citations and references
 \RequirePackage{natbib,har2nat}
@@ -36,18 +42,26 @@
 \renewcommand{\bf}{\normalfont\bfseries}   % Replace deprecated \bf
 \renewcommand{\harvardurl}{\url}           % Replace obsolete \harvardurl
 
-% Header
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-\rhead{\begin{minipage}[b]{12cm}\centering\footnotesize  Proceedings of the 1st International Conference on the Stability and Safety\\
-of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK\\[1ex]\ 
-\end{minipage}}
-\lhead{\includegraphics[width=4.5cm]{stabslogo.jpg}}
-\cfoot{}
+% Header and footer with KOMA-Script scrlayer-scrpage class
+\RequirePackage{pbox}
+\RequirePackage[headsepline]{scrlayer-scrpage} % Apply scrheadings page style,
+\pagestyle{scrheadings}                 % which becomes accessible as headings
+\addtokomafont{pagehead}{\footnotesize\sffamily\slshape}
+\cohead{%
+  % Logo and proceedings title both vertically centered on the baseline
+  % (wrap in \fbox with \setlength{\fboxsep}{0pt} for debugging purposes)
+  \parbox[c]{\stabs@logowidth}{\usebox{\stabs@logo}}%
+  \hfill
+  \pbox[c]{\textwidth}{\relax\ifvmode\centering\fi
+    Proceedings of the 1st International Conference on the Stability and Safety
+    \\of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK}%
+  % Reserved space for page number in collected proceedings
+  \hspace{15mm}
+}
+\cofoot{} % Clear page number in footer (default in scrheadings page style)
 
 % Footnotes
 \RequirePackage[hang,flushmargin]{footmisc}
-\renewcommand\footnoterule{\kern-3\p@\hrule\@width5cm\kern2.6\p@}
 
 % Hyperlinks
 \RequirePackage[breaklinks=true,colorlinks=true,allcolors=blue]{hyperref}
@@ -63,10 +77,10 @@ of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK\\[1ex]\
 \setkomafont{paragraph}{\hspace{6mm}\normalfont\underline}
 
 % Title
-\RequirePackage{letltxmacro}           % tex.stackexchange.com/a/47372
-\LetLtxMacro{\stabs@komatitle}{\title} % tex.stackexchange.com/q/82850
+\RequirePackage{letltxmacro}             % tex.stackexchange.com/a/47372
+\LetLtxMacro{\stabs@komatitle}{\title}   % tex.stackexchange.com/q/82850
 \renewcommand*{\title}[1]{\stabs@komatitle{\vspace{-17mm}\LARGE #1}}
-\renewcommand{\titlepagestyle}{fancy}  % Default plain
+\renewcommand{\titlepagestyle}{headings} % Default plain for title page
 
 % Authors
 \setkomafont{author}{%          % Abuse \setkomafont to increase vertical
@@ -113,3 +127,10 @@ of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK\\[1ex]\
     \global\let\keywords\relax
   ]
 }
+
+% Appendix
+\newcommand*{\appendixmore}{              % Appendix sections as in mainmatter
+\renewcommand*{\sectionformat}{           % but with "Appendix A." in front
+\appendixname~\thesection\autodot\enskip} %
+\renewcommand*{\sectionmarkformat}{       %
+\appendixname~\thesection\autodot\enskip}}
