@@ -2,32 +2,44 @@
 
 \documentclass{stabs2021}
 
-\usepackage{amsmath,amssymb}
+% Choose your dialect of English for correct hyphenation patterns
+% List of languages in documentation on ctan.org/pkg/babel
+% Section 1.27 "Languages supported by babel with ldf files"
+\usepackage[british]{babel}
 
-\title{Guidelines for Preparation of Manuscripts}
-\author{
-  Author 01, first name, surname, \textit{Affiliation 01}, \href{mailto:test@example.com}{test@example.com}\\[1em]
-  Author 02, first name, surname, \textit{Affiliation 02}, \href{mailto:test@example.com}{test@example.com}\\[1em]
-}
+% Recommended for mathematical typesetting
+\usepackage{amsmath,amssymb}
 
 \begin{document}
 
-\maketitle
+\title{Guidelines for Preparation of Manuscripts}
 
-\begin{abstract}
-  Authors of papers have to type these in a form suitable for direct
-  photographic reproduction by the publisher. In order to ensure
-  uniform style throughout the volume, all the papers have to be
-  prepared strictly according to the instructions set below, which
-  essentially follow the ITTC format.
+\author{
+  Firstname Surname, \textit{Affiliation},
+  \href{mailto:test@example.com}{test@example.com}
+  \and
+  Firstname Surname, \textit{Other affiliation},
+  \href{mailto:test@example.com}{test@example.com}
+}
 
-  The abstract should be a brief description of the scope of the
-  paper, not exceeding 100 words in length.
-\end{abstract}
+% Don't write out any text before this environment
+% It starts a new page and typesets its content in one-column mode
+\begin{frontmatter}
+  \maketitle
 
-\keywords{at least 3 suitable keywords for indexing purposes}
+  \begin{abstract}
+    Authors of papers have to type these in a form suitable for direct
+    photographic reproduction by the publisher. In order to ensure
+    uniform style throughout the volume, all the papers have to be
+    prepared strictly according to the instructions set below, which
+    essentially follow the ITTC format.
 
-\begin{multicols}{2}
+    The abstract should be a brief description of the scope of the
+    paper, not exceeding 100 words in length.
+  \end{abstract}
+
+  \keywords{at least 3 suitable keywords for indexing purposes}
+\end{frontmatter}
 
 \section{Introduction}
 
@@ -35,7 +47,7 @@ Please note that this section and all subsequent sections and
 subsections are numbered.  All main headings and sub-headings should
 be typed in bold as shown below.
 
-\section{Introductory information for authors}
+\section{Introductory Information for Authors}
 
 \subsection{Word Processor}
 
@@ -66,12 +78,12 @@ wish, authors should include a disclaimer at the end of the paper
 stating that the opinions expressed are those of the author and not
 those of the company or organization that they are representing.
 
-\section{PAGE FORMAT}
+\section{Page Format}
 
 It is required that the papers be prepared on A4 page format (210 mm
-$\times$ 297 mm). All dimensions concerning the page layout are given
-in millimetres. The Microsoft Word program allows the user to specify
-the configuration using these metric dimensions.
+\(\times\) 297 mm). All dimensions concerning the page layout are
+given in millimetres. The Microsoft Word program allows the user to
+specify the configuration using these metric dimensions.
 
 \subsection{Top and Bottom Margins}
 
@@ -90,16 +102,16 @@ column width is to be 81 mm and the spacing between the columns is to
 be 8 mm. The left side margin is to be 20 mm. The corresponding right
 hand margin is 20 mm.
 
-\section{Manuscript format conventions}
+\section{Manuscript Format Conventions}
 
 \paragraph{Font.}
 
 The text font must be 12 point ``Times New Roman'' type (the most
 common type fonts available on laser printers). Greek letters
-appearing in equations or text (such as $\alpha$, $\beta$, $\gamma$)
-should also be 12 point and set in the standard ``Symbol'' type
-font. The vertical line spacing should be 14 points (equating a line
-height of 4.95 mm).
+appearing in equations or text (such as \(\alpha\), \(\beta\),
+\(\gamma\)) should also be 12 point and set in the standard ``Symbol''
+type font. The vertical line spacing should be 14 points (equating a
+line height of 4.95 mm).
 
 \paragraph{Justification.}
 
@@ -287,7 +299,5 @@ small, rectangular protuberances \citep{sparrow1980forced}. \dots
 [...]
 
 \bibliography{bibtex}
-
-\end{multicols}
 
 \end{document}
