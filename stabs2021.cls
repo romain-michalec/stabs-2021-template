@@ -23,30 +23,28 @@
 \newlength{\stabs@logoheight}                         % Used to set header
 \settoheight{\stabs@logoheight}{\usebox{\stabs@logo}} % height just below
 
+% Header height = logo height + some separation from header line
+\newlength{\stabs@logosep}                            % Used in header
+\setlength{\stabs@logosep}{2mm}                       % composition
+\newlength{\stabs@headheight}
+\setlength{\stabs@headheight}{\stabs@logoheight}
+\addtolength{\stabs@headheight}{\stabs@logosep}
+
 % Page layout (add option showframe to package geometry for debugging purposes)
 \setlength{\columnsep}{8mm}
-\RequirePackage[margin=2cm,top=3.2cm,headheight=\stabs@logoheight]{geometry}
+\RequirePackage[margin=2cm,top=3.2cm,headheight=\stabs@headheight]{geometry}
 
 % Text layout
 \RequirePackage[skip,indent=6mm]{parskip} % Set \parskip to 0.5\baselineskip
 \RequirePackage{indentfirst}              % Indent first paragraph of sections
 \RequirePackage{microtype}
 
-% Citations and references
-\RequirePackage{natbib,har2nat}
-\bibliographystyle{dcu}                    % A Harvard bibliography style
-\setcitestyle{aysep={,}}                   % Default semicolon in dcu style
-\setlength{\bibhang}{6mm}                  % Default 1em in natbib
-\renewcommand{\harvardyearleft}{\unskip, } % Replace (yyyy) with , yyyy.
-\renewcommand{\harvardyearright}[1]{.}     % tex.stackexchange.com/a/20204
-\renewcommand{\bf}{\normalfont\bfseries}   % Replace deprecated \bf
-\renewcommand{\harvardurl}{\url}           % Replace obsolete \harvardurl
-
 % Header and footer with KOMA-Script scrlayer-scrpage class
 \RequirePackage{pbox}
 \RequirePackage[headsepline]{scrlayer-scrpage} % Apply scrheadings page style,
 \pagestyle{scrheadings}                 % which becomes accessible as headings
 \addtokomafont{pagehead}{\footnotesize\sffamily\slshape}
+\setlength{\fboxsep}{0pt}
 \cohead{%
   % Logo and proceedings title both vertically centered on the baseline
   % (wrap in \fbox with \setlength{\fboxsep}{0pt} for debugging purposes)
@@ -57,11 +55,23 @@
     \\of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK}%
   % Reserved space for page number in collected proceedings
   \hspace{15mm}
+  % Some separation from header line
+  \vspace{\stabs@logosep}
 }
 \cofoot{} % Clear page number in footer (default in scrheadings page style)
 
 % Footnotes
 \RequirePackage[hang,flushmargin]{footmisc}
+
+% Citations and references
+\RequirePackage{natbib,har2nat}
+\bibliographystyle{dcu}                    % A Harvard bibliography style
+\setcitestyle{aysep={,}}                   % Default semicolon in dcu style
+\setlength{\bibhang}{\parindent}           % Default 1em in natbib
+\renewcommand{\harvardyearleft}{\unskip, } % Replace (yyyy) with , yyyy.
+\renewcommand{\harvardyearright}[1]{.}     % tex.stackexchange.com/a/20204
+\renewcommand{\bf}{\normalfont\bfseries}   % Replace deprecated \bf
+\renewcommand{\harvardurl}{\url}           % Replace obsolete \harvardurl
 
 % Hyperlinks
 \RequirePackage[breaklinks=true,colorlinks=true,allcolors=blue]{hyperref}
