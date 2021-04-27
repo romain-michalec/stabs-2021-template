@@ -44,7 +44,6 @@
 \RequirePackage[headsepline]{scrlayer-scrpage} % Apply scrheadings page style,
 \pagestyle{scrheadings}                 % which becomes accessible as headings
 \addtokomafont{pagehead}{\footnotesize\sffamily\slshape}
-\setlength{\fboxsep}{0pt}
 \cohead{%
   % Logo and proceedings title both vertically centered on the baseline
   % (wrap in \fbox with \setlength{\fboxsep}{0pt} for debugging purposes)
