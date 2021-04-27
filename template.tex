@@ -22,24 +22,23 @@
   \href{mailto:test@example.com}{test@example.com}
 }
 
-% Don't write out any text before this environment
-% It starts a new page and typesets its content in one-column mode
-\begin{frontmatter}
-  \maketitle
+\begin{stabsabstract}
+  Authors of papers have to type these in a form suitable for direct
+  photographic reproduction by the publisher. In order to ensure
+  uniform style throughout the volume, all the papers have to be
+  prepared strictly according to the instructions set below, which
+  essentially follow the ITTC format.
 
-  \begin{abstract}
-    Authors of papers have to type these in a form suitable for direct
-    photographic reproduction by the publisher. In order to ensure
-    uniform style throughout the volume, all the papers have to be
-    prepared strictly according to the instructions set below, which
-    essentially follow the ITTC format.
+  The abstract should be a brief description of the scope of the
+  paper, not exceeding 100 words in length.
+\end{stabsabstract}
 
-    The abstract should be a brief description of the scope of the
-    paper, not exceeding 100 words in length.
-  \end{abstract}
+\keywords{at least 3 suitable keywords for indexing purposes}
 
-  \keywords{at least 3 suitable keywords for indexing purposes}
-\end{frontmatter}
+% This command typesets the title, author, abstract, and keywords in
+% one-column mode. Don't write out any text before it, as it would
+% cause LaTeX to start a new page to break out of two-column mode.
+\makestabstitle
 
 \section{Introduction}
 

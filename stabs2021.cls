@@ -13,7 +13,7 @@
 
 % Page layout (add option showframe to package geometry for debugging purposes)
 \setlength{\columnsep}{8mm}
-\RequirePackage[top=3.2cm,bottom=2cm,left=2cm,right=2cm,headheight=2.4cm]{geometry}
+\RequirePackage[margin=2cm,top=3.2cm,headheight=2.4cm]{geometry}
 
 % Text layout
 \RequirePackage[skip,indent=6mm]{parskip} % Set \parskip to 0.5\baselineskip
@@ -29,8 +29,8 @@
 \setlength{\bibhang}{6mm}                  % Default 1em in natbib
 \renewcommand{\harvardyearleft}{\unskip, } % Replace (yyyy) with , yyyy.
 \renewcommand{\harvardyearright}[1]{.}     % tex.stackexchange.com/a/20204
-\renewcommand{\bf}{\normalfont\bfseries}   % Replace deprecated \bf command
-\renewcommand{\harvardurl}{\url}           % Replace obsolete \harvardurl command
+\renewcommand{\bf}{\normalfont\bfseries}   % Replace deprecated \bf
+\renewcommand{\harvardurl}{\url}           % Replace obsolete \harvardurl
 
 % Header
 \RequirePackage{fancyhdr}
@@ -70,27 +70,42 @@ of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK\\[1ex]\
   \normalsize}                  % class typesets the authors in a centered,
 \date{}                         % single-column tabular environment.
 
-% Keywords
-\newcommand*{\keywords}[1]{\par
-  \noindent{\footnotesize\textbf{Keywords:} \textit{#1}}\par
-  \vspace{2\parskip}}
+% Store contents of stabsabstract environment in \@stabsabstract
+\RequirePackage{environ}
+\NewEnviron{stabsabstract}{\global\let\@stabsabstract\BODY}
+\newcommand{\@stabsabstract}{%
+  \@latex@warning@no@line{No \noexpand\stabsabstract given}}
+
+% Store contents of \keywords in \@keywords
+\newcommand{\keywords}[1]{\global\def\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 
 % Front matter
 \newlength{\stabs@parskip}               % \twocolumn (used below) resets
 \setlength{\stabs@parskip}{\parskip}     % these lengths in its optional
 \newlength{\stabs@parindent}             % one-column argument, so we
 \setlength{\stabs@parindent}{\parindent} % memorize them here...
-\RequirePackage{environ}
-\NewEnviron{frontmatter}{
+\newcommand{\makestabstitle}{
   % Switch to two-column mode
   \twocolumn[
     % With some preceding one-column content
     \setlength{\parskip}{\stabs@parskip}     % ...and restore them here
     \setlength{\parindent}{\stabs@parindent}
+    % Title and authors
+    \maketitle
     % Abstract title
     \LetLtxMacro{\stabs@komaabstractname}{\abstractname}
     \renewcommand{\abstractname}{\footnotesize\stabs@komaabstractname}
-    % Input the collected body of the frontmatter environment
-    \BODY
+    % Abstract
+    \begin{abstract}
+      \@stabsabstract
+    \end{abstract}
+    \par
+    % Keywords
+    \noindent{\footnotesize\textbf{Keywords:} \textit{\@keywords}}\par
+    \vspace{2\parskip}
+    % Clear \@keywords and \keywords after use
+    \global\let\@keywords\@empty
+    \global\let\keywords\relax
   ]
 }
