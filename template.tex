@@ -1,6 +1,9 @@
 % -*- coding: utf-8-unix; mode: latex; fill-column: 70 -*-
 
-\documentclass{stabs2021}
+\documentclass[pagenumbers]{stabs2021}
+
+% Leave option pagenumbers in to facilitate review. Remove it for
+% final upload after acceptation.
 
 % The class is based on the KOMA-Script article class and provides
 % therefore all the features that this class provides. Documentation
@@ -205,12 +208,47 @@ text\footnote{The line above the footnote is optional, but it does
   help to keep the footnoes separate from the main body of
   text}. Whenever possible, the use of footnotes should be avoided.
 
-[...]
+
+\subsection{Tabulations/Enumerations}
+
+Where several considerations, conditions, requirements, or other qualifying items are involved in a presentation, it is often advantageous to put them in tabular or enumerative form, rather than to run them into the text. This arrangement, in addition to emphasizing the items, creates a graphic impression that aids the reader in accessing the information and in forming an overall picture. It is customary to identify the individual items as
+\begin{enumerate}[(1)]
+    \item First,
+    \item Second,
+    \item Third,
+\end{enumerate}
+or
+\begin{enumerate}[(a)]
+    \item First,
+    \item Second,
+    \item Third,
+\end{enumerate}
+or simply using bullets,
+\begin{itemize}
+    \item First,
+    \item Second,
+    \item Third.
+\end{itemize}
+The above arrangements can be obtained in this format using the ``Numbered-1'', ``Lettered-1'' and ``Pointed-1'' styles, respectively. Although inclusion of such elements makes the text livelier, care should be taken not to use this scheme too frequently, as it can make the reading choppy and invalidate their purpose and usefulness. Tables can also be incuded, see Table~\ref{tbl:example-table}.
+\begin{table}[ht]
+\centering
+\caption{Thicker horizontal lines above and below the table.}
+\label{tbl:example-table}
+\begin{tabular}[t]{lcc}
+\toprule
+&Treatment A&Treatment B\\
+\midrule
+John Smith&1&2\\
+Jane Doe&--&3\\
+Mary Johnson&4&5\\
+\bottomrule
+\end{tabular}
+\end{table}%
 
 \section{Mathematics}
 
-Equations should be numbered consecutively beginning with (1) to the
-end of the report, including any appendices. The number should be
+Equations should be numbered consecutively beginning with~\eqref{eq:bernoulli}
+to the end of the report, including any appendices. The number should be
 enclosed in parentheses (as shown above) and set flush right in the
 column on the same line as the first line of the equation. This is the
 number that should be used when referring to equations within the
@@ -223,6 +261,7 @@ available on Microsoft Word program. Vector quantities should appear
 in bold lower case letters and tensor quantities in bold upper case
 letters. For instance, the Bernoulli’s equation is
 \begin{equation}
+  \label{eq:bernoulli}
   \frac{\partial\phi}{\partial t} + \frac12 |\nabla \phi|^2 + \frac P\rho + gy = C(t)
 \end{equation}
 
@@ -280,6 +319,30 @@ of Justified and Centred Captions, respectively) are placed above the
 tables. Space corresponding to a blank line should be provided above
 and below figures and their captions.
 
+\subsection{Example}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{stabsgraph.png}
+    \caption{Transmission coefficient vs. $L/B$ with separation distance variation. $B = 0.2\ \mathrm{m}$, $B/d = 4$.}
+    \label{fig:example-figure}
+\end{figure}
+Figure~\ref{fig:example-figure} is an example of how a figure used in a single column should be arranged on the page.
+
+\subsection{Lettering}
+
+For good legibility, lettering (call-outs) in figures must be 2~mm high or higher on the material as it is placed on final report. 
+
+Lettering may be in any appropriate font, although common sans serif fonts (such as Helvetica) often look best on charts and graphs.
+
+\section{Conclusions}
+
+The main body of the text should end with the conclusions of the paper.
+
+\section{Acknowledments}
+
+Brief acknowledgments may be added.
+
 \section{References}
 
 \subsection{Text Citation}
@@ -301,7 +364,9 @@ small, rectangular protuberances \citep{sparrow1980forced}. \dots
 \dots\ Convection of this type is treated in several sources
 \citep{lee1982structure, sparrow1980fluid, tung1982evaporative} \dots
 
-[...]
+\subsection{List of References}
+
+References for cited material should be listed at the end of the report. They should be arranged in alphabetic order according to the last name of the (first) author. Each reference should include the last name of each author followed by the authors’ initials, and typed with the first line aligned flush left; the second and the subsequent lines are indented 6 mm (``Reference style'' can be used).
 
 \bibliography{bibtex}
 

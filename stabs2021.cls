@@ -3,6 +3,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{stabs2021}[2021/04/27]
 
+% Declare class options
+\DeclareOption{pagenumbers}{\newcommand{\stabs@pagenumbers}{}}
+\DeclareOption*{
+  \ClassWarning{stabs2021}{Unknown class option '\CurrentOption'}}
+
+% Process class options
+\ProcessOptions\relax
+
 % Base class is the KOMA-Script article class
 \LoadClass[twocolumn=true,fontsize=12pt,headings=small,abstract=true]{scrartcl}
 
@@ -52,8 +60,10 @@
   \pbox[c]{\textwidth}{\relax\ifvmode\centering\fi
     Proceedings of the 1st International Conference on the Stability and Safety
     \\of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK}%
-  % Reserved space for page number in collected proceedings
-  \hspace{15mm}
+  % Reserved space for page number in collected proceedings,
+  % or actual page number if class option pagenumbers is active
+  % (useful when writing the article and to facilitate review)
+  \@ifundefined{stabs@pagenumbers}{\hspace{15mm}}{\hfill\thepage}%
   % Some separation from header line
   \vspace{\stabs@logosep}
 }
@@ -61,6 +71,10 @@
 
 % Footnotes
 \RequirePackage[hang,flushmargin]{footmisc}
+
+% enumeration, tables
+\RequirePackage{enumerate}
+\RequirePackage{booktabs}
 
 % Citations and references
 \RequirePackage{natbib,har2nat}
@@ -136,10 +150,3 @@
     \global\let\keywords\relax
   ]
 }
-
-% Appendix
-\newcommand*{\appendixmore}{              % Appendix sections as in mainmatter
-\renewcommand*{\sectionformat}{           % but with "Appendix A." in front
-\appendixname~\thesection\autodot\enskip} %
-\renewcommand*{\sectionmarkformat}{       %
-\appendixname~\thesection\autodot\enskip}}
