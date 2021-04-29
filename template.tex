@@ -1,23 +1,35 @@
 % -*- coding: utf-8-unix; mode: latex; fill-column: 70 -*-
 
-\documentclass[pagenumbers]{stabs2021}
+\documentclass[bibtex,pagenumbers]{stabs2021}
 
-% Leave option pagenumbers in to facilitate review. Remove it for
-% final upload after acceptation.
+% Leave option pagenumbers in to print page numbers in the header.
+% This is helpful when writing the article and to facilitate review.
+% Remove the option for final upload after acceptance.
+
+% Use either option bibtex (default) or biblatex (recommended) to
+% indicate the bibliography system you're using. See bibliography
+% commands in the preamble and at the end of this file, and BibLaTeX
+% and Biber documentation on CTAN: ctan.org/pkg/biblatex, ctan.org/
+% pkg/biber.
 
 % The class is based on the KOMA-Script article class and provides
-% therefore all the features that this class provides. Documentation
+% therefore all the features that that class provides. Documentation
 % on CTAN: ctan.org/pkg/scrartcl.
 
 % The following packages are loaded by the class and are therefore
 % available without user intervention: babel, graphicx, hyperref,
-% natbib, amsmath, and every symbol that amssymb defines.
-% Documentation on CTAN: ctan.org/pkg/<pkgname>.
+% enumerate, booktabs, natbib (if bibtex), biblatex (if biblatex),
+% amsmath, and every symbol that amssymb defines. Documentation on
+% CTAN: ctan.org/pkg/<pkgname>.
 
 % Select your dialect of English for correct hyphenation patterns:
 % see list of languages in documentation on ctan.org/pkg/babel,
 % section 1.27 "Languages supported by babel with ldf files"
 \selectlanguage{british}
+
+% Uncomment following line if using BibLaTeX (recommended)
+% See also \printbibliography at the end of this file
+% \addbibresource{biblatex.bib}
 
 \title{Guidelines for Preparation of Manuscripts}
 
@@ -208,7 +220,6 @@ text\footnote{The line above the footnote is optional, but it does
   help to keep the footnoes separate from the main body of
   text}. Whenever possible, the use of footnotes should be avoided.
 
-
 \subsection{Tabulations/Enumerations}
 
 Where several considerations, conditions, requirements, or other qualifying items are involved in a presentation, it is often advantageous to put them in tabular or enumerative form, rather than to run them into the text. This arrangement, in addition to emphasizing the items, creates a graphic impression that aids the reader in accessing the information and in forming an overall picture. It is customary to identify the individual items as
@@ -354,6 +365,14 @@ the author(s) within the same parentheses depends on the context. Some
 examples using the sample references listed below are illustrated
 hereafter:
 
+% If using BibTeX (default), use natbib's \citet and \citep commands
+% for textual and parenthetical citations, respectively.
+
+% If using BibLaTeX (recommended), use the package's \textcite and
+% \parencite commands instead. The stabs2021 class loads BibLaTeX
+% with the option natbib=true so that natbib's citation commands may
+% still be used.
+
 \dots\ It was shown by \citet{kwon1981prediction} that numerical
 integration of the Navier-Stokes equations can be successfully
 performed for low Reynolds numbers. \dots
@@ -368,12 +387,17 @@ small, rectangular protuberances \citep{sparrow1980forced}. \dots
 
 References for cited material should be listed at the end of the report. They should be arranged in alphabetic order according to the last name of the (first) author. Each reference should include the last name of each author followed by the authors’ initials, and typed with the first line aligned flush left; the second and the subsequent lines are indented 6 mm (``Reference style'' can be used).
 
+% Uncomment following line if using BibTeX (default)
 \bibliography{bibtex}
+
+% Uncomment following line if using BibLaTeX (recommended)
+% See also \addbibresource{biblatex.bib} in the preamble
+% \printbibliography
 
 \appendix
 
-\section{Some appendix section}
+\section{Appendix}
 
-Appendix comes after the bibliography.
+Put appendices, if any, after the bibliography.
 
 \end{document}

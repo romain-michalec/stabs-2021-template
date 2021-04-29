@@ -1,12 +1,20 @@
 % -*- coding: utf-8-unix; mode: latex -*-
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{stabs2021}[2021/04/27]
+\ProvidesClass{stabs2021}[2021/04/28]
 
 % Declare class options
-\DeclareOption{pagenumbers}{\newcommand{\stabs@pagenumbers}{}}
+\newif{\ifbiblatex}
+\DeclareOption{bibtex}{\biblatexfalse}  % Typeset bibliography and citations
+\DeclareOption{biblatex}{\biblatextrue} % with either BibTeX or BibLaTeX
+
+\DeclareOption{pagenumbers}{\newcommand{\stabs@pagenumbers}{}} % Page in header
+
 \DeclareOption*{
   \ClassWarning{stabs2021}{Unknown class option '\CurrentOption'}}
+
+% Execute default class options
+\ExecuteOptions{bibtex} % Default is BibTeX but using BibLaTeX is recommended
 
 % Process class options
 \ProcessOptions\relax
@@ -62,7 +70,7 @@
     \\of Ships and Ocean Vehicles, 7-11 June 2021, Glasgow, Scotland, UK}%
   % Reserved space for page number in collected proceedings,
   % or actual page number if class option pagenumbers is active
-  % (useful when writing the article and to facilitate review)
+  % (helpful when writing the article and to facilitate review)
   \@ifundefined{stabs@pagenumbers}{\hspace{15mm}}{\hfill\thepage}%
   % Some separation from header line
   \vspace{\stabs@logosep}
@@ -72,19 +80,50 @@
 % Footnotes
 \RequirePackage[hang,flushmargin]{footmisc}
 
-% enumeration, tables
+% Ordered lists
 \RequirePackage{enumerate}
+
+% Tables
 \RequirePackage{booktabs}
 
 % Citations and references
-\RequirePackage{natbib,har2nat}
-\bibliographystyle{dcu}                    % A Harvard bibliography style
-\setcitestyle{aysep={,}}                   % Default semicolon in dcu style
-\setlength{\bibhang}{\parindent}           % Default 1em in natbib
-\renewcommand{\harvardyearleft}{\unskip, } % Replace (yyyy) with , yyyy.
-\renewcommand{\harvardyearright}[1]{.}     % tex.stackexchange.com/a/20204
-\renewcommand{\bf}{\normalfont\bfseries}   % Replace deprecated \bf
-\renewcommand{\harvardurl}{\url}           % Replace obsolete \harvardurl
+\ifbiblatex
+  % Use BibLaTeX (and BibLaTeX-ext)
+  \RequirePackage{csquotes}
+  \RequirePackage[style=ext-authoryear-comp,natbib=true]{biblatex}
+  % Number of names before a name list in a bib. entry is truncated w/ "et al."
+  \ExecuteBibliographyOptions{maxbibnames=5} % Default 3
+  % Abbreviate given names in bib. entries
+  \ExecuteBibliographyOptions{giveninits=true} % Default false
+  \ExecuteBibliographyOptions{uniquename=init} % Default full in authoryear-comp
+  % Repeat identical name lists rather than replacing them with a dash
+  \ExecuteBibliographyOptions{dashed=false} % Default true in authoryear
+  % Don't sort multiple citations i.e. citations such as \cite{ref1, ref2, ...}
+  \ExecuteBibliographyOptions{sortcites=false} % Default true in authoryear-comp
+  % Write family names before given names in bib. entries
+  \DeclareNameAlias{author}{family-given} % Default family-given/given-family
+  \DeclareNameAlias{editor}{family-given} % e.g. "Doe, John and Jane Doe"
+  % Vertical spacing between bib. entries
+  \setlength{\bibitemsep}{\parskip} % Default \itemsep
+  % Separator between name list and year in bib. entries
+  \DeclareDelimFormat[bib]{nameyeardelim}{\addcomma\space} % Default space
+  % Format of year in bib. entries (biblatex-ext specific command)
+  \DeclareFieldFormat{biblabeldate}{#1} % Default (#1) i.e. (yyyy)
+\else
+  % Use BibTeX (and natbib)
+  \RequirePackage{natbib,har2nat}
+  \bibliographystyle{dcu} % A Harvard bibliography style
+  % Separator between name list and year in citations
+  \setcitestyle{aysep={,}} % Default semicolon in dcu style
+  % Hanging indentation of bib. entries
+  \setlength{\bibhang}{\parindent} % Default 1em in natbib
+  % Format of year in bib. entries
+  \renewcommand{\harvardyearleft}{\unskip, } % Replace " (yyyy)" with ", yyyy."
+  \renewcommand{\harvardyearright}[1]{.}     % tex.stackexchange.com/a/20204
+  % Handle deprecated commands in dcu style
+  \renewcommand{\bf}{\normalfont\bfseries} % Replace deprecated \bf
+  \renewcommand{\harvardurl}{\url}         % Replace obsolete \harvardurl
+\fi
 
 % Hyperlinks
 \RequirePackage[breaklinks=true,colorlinks=true,allcolors=blue]{hyperref}
