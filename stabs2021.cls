@@ -1,7 +1,7 @@
 % -*- coding: utf-8-unix; mode: latex -*-
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{stabs2021}[2021/04/28]
+\ProvidesClass{stabs2021}[2021/04/29]
 
 % Declare class options
 \newif{\ifbiblatex}
@@ -33,7 +33,7 @@
 % Logo width and height
 \RequirePackage{graphicx}
 \newsavebox{\stabs@logo}
-\savebox{\stabs@logo}{\includegraphics{stabslogo}}
+\savebox{\stabs@logo}{\includegraphics{stabslogo.png}}
 \newlength{\stabs@logowidth}                          % Used in header
 \settowidth{\stabs@logowidth}{\usebox{\stabs@logo}}   % composition
 \newlength{\stabs@logoheight}                         % Used to set header
@@ -85,6 +85,9 @@
 
 % Tables
 \RequirePackage{booktabs}
+
+% Mathematics (amsmath is already loaded by newtxmath)
+\renewcommand{\vec}{\mathbf} % Upright bold vectors (default small over-arrow)
 
 % Citations and references
 \ifbiblatex
