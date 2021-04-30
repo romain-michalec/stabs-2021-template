@@ -125,6 +125,9 @@
   \renewcommand{\harvardurl}{\url}         % Replace obsolete \harvardurl
 \fi
 
+% Redaction capability to anonymize the output
+\RequirePackage{censor}
+
 % Hyperlinks
 \RequirePackage[breaklinks=true,colorlinks=true,allcolors=blue]{hyperref}
 \urlstyle{rm}

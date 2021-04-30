@@ -19,8 +19,8 @@
 % The following packages are loaded by the class and are therefore
 % available without user intervention: babel, graphicx, hyperref,
 % enumerate, booktabs, natbib (if bibtex), biblatex (if biblatex),
-% amsmath, and every symbol that amssymb defines. Documentation on
-% CTAN: ctan.org/pkg/<pkgname>.
+% censor, amsmath, and every symbol that amssymb defines.
+% Documentation on CTAN: ctan.org/pkg/<pkgname>.
 
 % Select your dialect of English for correct hyphenation patterns:
 % see list of languages in documentation on ctan.org/pkg/babel,
@@ -33,12 +33,15 @@
 
 \title{Guidelines for Preparation of Manuscripts}
 
+% Uncomment following line to stop anonymizing the output
+% Beware that \censor doesn't work across lines
+% \StopCensoring
 \author{
-  Firstname Surname, \textit{Affiliation},
-  \href{mailto:test@example.com}{test@example.com}
+  \censor{Firstname Surname}, \censor{\textit{Affiliation}},
+  \censor{\href{mailto:test@example.com}{test@example.com}}
   \and
-  Firstname Surname, \textit{Other affiliation},
-  \href{mailto:test@example.com}{test@example.com}
+  \censor{Firstname Surname}, \censor{\textit{Other affiliation}},
+  \censor{\href{mailto:test@example.com}{test@example.com}}
 }
 
 \begin{stabsabstract}
