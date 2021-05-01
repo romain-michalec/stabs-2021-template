@@ -132,14 +132,19 @@
 \RequirePackage[breaklinks=true,colorlinks=true,allcolors=blue]{hyperref}
 \urlstyle{rm}
 
-% Section numbers
-\renewcommand{\sectionformat}{\thesection.\quad}
+% Sections
+\renewcommand{\sectionformat}{\thesection.\quad} % Period after number
+\addtokomafont{disposition}{\rmfamily}           % All sectioning commands
+\addtokomafont{section}{\MakeUppercase}          % Sections only
+
+% Subsections
 \renewcommand{\subsectionformat}{\thesubsection\qquad}
 
-% Section titles
-\addtokomafont{disposition}{\rmfamily}  % All sectioning commands
-\addtokomafont{section}{\MakeUppercase} % Sections only
+% Subsubsections (paragraphs)
 \setkomafont{paragraph}{\hspace{6mm}\normalfont\underline}
+\renewcommand{\sectioncatchphraseformat}[4]{% % Period after title
+  \hskip #2#3#4%                              % tex.stackexchange.com/a/415252
+  \Ifstr{#1}{paragraph}{.}{}}
 
 % Title
 \RequirePackage{letltxmacro}             % tex.stackexchange.com/a/47372
