@@ -1,7 +1,7 @@
 % -*- coding: utf-8-unix; mode: latex -*-
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{stabs2021}[2021/04/29]
+\ProvidesClass{stabs2021}[2021/04/30]
 
 % Declare class options
 \newif{\ifbiblatex}
@@ -143,8 +143,9 @@
 % Subsubsections (paragraphs)
 \setkomafont{paragraph}{\hspace{6mm}\normalfont\underline}
 \renewcommand{\sectioncatchphraseformat}[4]{% % Period after title
-  \hskip #2#3#4%                              % tex.stackexchange.com/a/415252
-  \Ifstr{#1}{paragraph}{.}{}}
+  \hskip #2#3#4\Ifstr{#1}{paragraph}{.}{}}    % tex.stackexchange.com/a/415252
+\RedeclareSectionCommand[%                    % No additional vertical spacing
+  beforeskip=0pt]{paragraph}                  % before title (just \parskip)
 
 % Title
 \RequirePackage{letltxmacro}             % tex.stackexchange.com/a/47372
