@@ -80,9 +80,6 @@
 % Footnotes
 \RequirePackage[hang,flushmargin]{footmisc}
 
-% Ordered lists
-\RequirePackage{enumerate}
-
 % Tables
 \RequirePackage{booktabs}
 
